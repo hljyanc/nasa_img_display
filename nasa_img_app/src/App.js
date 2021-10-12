@@ -7,7 +7,7 @@ function App() {
   const [searchedImages, setSearchedImages] = useState([]);
 
   const search = (term) => {
-    fetch('https://images-api.nasa.gov/search?q=test&media_type=image')
+    fetch(`https://images-api.nasa.gov/search?q=${term}&media_type=image`)
            .then(response => response.json())
            .then(jsonResponse => {
              return jsonResponse.collection.items.map(result => ({
@@ -21,13 +21,11 @@ function App() {
   }
 
   const toggleLikeState = (image) => {
-    setSearchedImages((prev) =>{
-     prev.map(el => {
-          if(el.id === image.id){
-            el.likeState = el.likeState ? false : true;
-          }
-        });
-      });
+    const newSearchedImages = searchedImages.map( d => ({
+      ...d,
+      likeState: d.id === image.id ? !d.likeState : d.likeState,
+    }));
+    setSearchedImages(newSearchedImages);
   }
   return (
     <React.Fragment>

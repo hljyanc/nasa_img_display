@@ -10,7 +10,9 @@ const Display = props => {
                 <img src={image.href} alt="display_image"/>
                 <figcaption>{image.title}</figcaption>
                 <p>{image.date}</p>
-                <button onClick={props.onToggleLikeState(image)}>{image.likeState ? 'liked' : 'like'}</button>
+                <button type="button" onClick={()=>{
+                    props.onToggleLikeState(image);
+                }}>{image.likeState ? 'liked' : 'like'}</button>
             </figure>
         )}
         	
@@ -19,3 +21,4 @@ const Display = props => {
   };
   
   export default Display;
+ 

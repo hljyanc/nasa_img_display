@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import classes from './SearchBar.module.css';
 
 const SearchBar = props => {
-    return (
+  const searchTermRef = useRef();
+  const handleSearch = () =>{
+    const term = searchTermRef.current.value;
+    props.onSearch(term);
+  }
+  return (
     <div className={classes.wrap}>
         <div className={classes.search}>
-           <input type="text" className={classes.searchTerm} placeholder="test" />
+           <input 
+            type="text" 
+            className={classes.searchTerm} 
+            placeholder="Search" 
+            ref={searchTermRef}/>
            <button 
-            type="submit" 
+            type="search" 
             className={classes.searchButton}
-            onClick={props.onSearch}>
+            onClick={handleSearch}>
               Search
           </button>
         </div>
